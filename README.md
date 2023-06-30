@@ -1,21 +1,24 @@
+# Summary
+
+This repository illustrates how to set up and use Event Driven Ansible (EDA) both from the command line as well as with the EDA Controller that is now part of Ansible Automation Platform 2.4.  In this example, a webhook event with a specified payload will run the playbook `say-hello.yml`.
 
 Reference: https://www.ansible.com/blog/getting-started-with-event-driven-ansible
 
-# To run this on the command line:
+# To run this on the command line
 
 `ansible-rulebook --rulebook rulebooks/webhook-example.yml -i inventory.yml --print-events`
 
 To test, run the following scenarios in another terminal:
 
-## This will execute the playbook:
+## This will execute the playbook
 
 `curl -H 'Content-Type: application/json' -d "{\"message\": \"Ansible is super cool\"}" 127.0.0.1:5001/endpoint`
 
-## This will execute the playbook and print the sender:
+## This will execute the playbook and print the sender
 
 `curl -H 'Content-Type: application/json' -d "{\"message\": \"Ansible is super cool\", \"sender\": \"Sammy\"}" 127.0.0.1:5001/endpoint`
 
-## This will not execute the playbook:
+## This will not execute the playbook
 
 `curl -H 'Content-Type: application/json' -d "{\"message\": \"Ansible is super cool dude\"}" 127.0.0.1:5001/endpoint`
 
