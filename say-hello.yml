@@ -1,0 +1,13 @@
+---
+- name: Print webhook message
+  hosts: localhost
+
+  tasks:
+    - name: Print the message
+      debug:
+        msg: "Message details: {{ ansible_eda.event.payload.message | default('No message') }} by {{ ansible_eda.event.payload.sender | default('No sender') }}"
+
+    - name: Print ansible_eda
+      debug:
+        var: ansible_eda
+      when: ansible_eda is defined
