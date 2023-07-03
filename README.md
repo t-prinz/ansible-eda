@@ -55,11 +55,14 @@ Inventory file: / (project root)
 
 ### Define a Job Template
 
+Note that you need to enable "Prompt on launch" in the Variables section in order for the playbook to have access to `ansible_eda`
+
 ```
 Name: EDA - Hello
 Inventory: EDA Inventory
 Project: EDA
 Playbook: say-hello.yml
+In the Variables section, enable "Prompt on launch"
 ```
 
 ### Define an Application
@@ -134,7 +137,5 @@ Click Create rulebook activation
 Select the History tab and then the Running activation that was just created
 
 To test, run the following in a terminal
-
-Note:  It doesn't appear that the variable ansible_eda is defined when run via AAP
 
 `curl -H 'Content-Type: application/json' -d "{\"message\": \"Ansible is super cool\"}" edactlr.example.com:8080/endpoint`
