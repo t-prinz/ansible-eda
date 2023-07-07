@@ -78,12 +78,14 @@ Client type: Public
 
 Click Save
 
-It doesn't appear the you need the Client ID, but it may be good to keep for future reference.
+It doesn't appear that you need the Client ID, but it may be good to keep for future reference.
 
 ### Define an access Token
 
 Select Access -> Users 
+
 Select the admin user and then the Tokens tab
+
 Click Add to add a new token with the following parameters:
 
 ```
@@ -109,7 +111,9 @@ Source Control URL: https://github.com/t-prinz/ansible-eda.git
 ### Define the access Token
 
 Select User Access -> Users
+
 Select the admin user and then the Controller Tokens tab
+
 Click Create controller token to add a new token using the following parameters:
 
 ```
@@ -122,6 +126,7 @@ Click Create controller token
 ### Create the Rulebook Activation
 
 Select Views -> Rulebook Activations
+
 Click Create rulebook activation to create an activation using the following parameters:
 
 ```
