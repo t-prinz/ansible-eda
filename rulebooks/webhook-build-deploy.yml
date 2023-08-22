@@ -9,10 +9,10 @@
         - ansible.eda.dashes_to_underscores:
 
   rules:
-    - name: Display payload
-      condition: event.payload is defined
-      action:
-        debug:
+#    - name: Display payload
+#      condition: event.payload is defined
+#      action:
+#        debug:
 
     - name: Build and deploy application
       condition: event.meta.headers.X_GitHub_Event == "push"
