@@ -1,5 +1,5 @@
 ---
-- name: Capture POSTs from gitea
+- name: Capture POSTs from git repository
   hosts: all
   sources:
     - ansible.eda.webhook:
@@ -9,10 +9,10 @@
         - ansible.eda.dashes_to_underscores:
 
   rules:
-    - name: Display payload
-      condition: event.payload is defined
-      action:
-        debug:
+#    - name: Display payload
+#      condition: event.payload is defined
+#      action:
+#        debug:
 
     - name: Build and deploy application
       condition: event.payload is defined
