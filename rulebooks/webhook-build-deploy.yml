@@ -1,5 +1,5 @@
 ---
-- name: Capture POSTs from git repository
+- name: Capture POSTs from GitHub repository
   hosts: all
   sources:
     - ansible.eda.webhook:
@@ -15,7 +15,7 @@
         debug:
 
     - name: Build and deploy application
-      condition: event.payload is defined
+      condition: event.meta.headers.X_GitHub_Event == "push"
       action:
         run_job_template:
           name: Applications - Build and Deploy HelloServlet - Development
