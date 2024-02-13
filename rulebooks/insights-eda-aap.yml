@@ -1,0 +1,18 @@
+---
+- name: Act on Insights events using the redhat.insights_eda.insights source
+  hosts: localhost
+
+  sources:
+    - redhat.insights_eda.insights:
+        host: 0.0.0.0
+        port: 5000
+        token: mysupersecrettoken
+
+  rules:
+    - name: Execute say-hello.yml playbook
+      condition: event.payload is defined
+      actions:
+        - debug:
+        - run_job_template:
+            name: EDA - Hello
+            organization: Default
