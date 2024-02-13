@@ -143,4 +143,4 @@ Select the History tab and then the Running activation that was just created
 
 To test, run the following in a terminal
 
-`curl -H 'Content-Type: application/json' -d "{\"message\": \"Ansible is super cool\"}" edactlr.example.com:8080/endpoint`
+`curl -H 'Content-Type: application/json' -d "{\"message\": \"Ansible is super cool\"}" edactlr.example.com:5000/endpoint`
