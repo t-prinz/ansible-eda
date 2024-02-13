@@ -3,10 +3,9 @@
   hosts: localhost
 
   sources:
-    - redhatinsights.eda.insights:
+    - ansible.eda.webhook:
         host: 0.0.0.0
         port: 5000
-        token: redhatinsighttoken
 
   rules:
     - name: Execute say-hello.yml playbook
