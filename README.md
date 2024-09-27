@@ -144,3 +144,60 @@ Select the History tab and then the Running activation that was just created
 To test, run the following in a terminal
 
 `curl -H 'Content-Type: application/json' -d "{\"message\": \"Ansible is super cool\"}" edactlr.example.com:5000/endpoint`
+
+# To run this when the Event Driven Ansible (EDA) Controller is installed as an operator in OpenShift
+
+## In the EDA controller
+
+Follow the same setup steps as used for the EDA setup above.  The key difference is that in OpenShift, a route will need
+to be created for the rulebook activation.
+
+When the rulebook is activated, it will report a job id:
+
+2024-09-27 13:28:20,749 Job activation-job-1-2 is running
+
+## In OpenShift
+
+Log in to either via the console or the CLI with the `oc` command; this assumes the CLI is used.
+
+### Obtain the service
+
+Obtain the list of services in the EDA project; by default, the project is ansible-automation-platform.
+
+```
+oc project ansible-automation-platform
+
+oc get services
+NAME                      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+aapcont-postgres-13       ClusterIP   None             <none>        5432/TCP   3d16h
+aapcont-service           ClusterIP   172.30.46.33     <none>        80/TCP     3d16h
+aapeda-api                ClusterIP   172.30.242.147   <none>        8000/TCP   18h
+aapeda-daphne             ClusterIP   172.30.32.254    <none>        8001/TCP   18h
+aapeda-postgres-13        ClusterIP   None             <none>        5432/TCP   18h
+aapeda-redis-svc          ClusterIP   172.30.66.92     <none>        6379/TCP   18h
+aapeda-ui                 ClusterIP   172.30.89.3      <none>        80/TCP     18h
+activation-job-1-2-5000   ClusterIP   172.30.206.245   <none>        5000/TCP   36m
+```
+
+In this example, the service is `activation-job-1-2-5000`
+
+Note how the port number is added to the job id reported above.
+
+### Create a route called webhook
+
+`oc expose service activation-job-1-2-5000 --name=webhook --port=5000`
+
+### Obtain the route
+
+This is the endpoint that will be used to send the event.
+
+```
+oc get route webhook -o jsonpath='{.spec.host}{"\n"}'
+webhook-ansible-automation-platform.apps.mycluster.example.com
+```
+
+To test, run the following in a terminal
+
+`curl -H 'Content-Type: application/json' -d "{\"message\": \"Ansible is super cool\"}" webhook-ansible-automation-platform.apps.mycluster.example.com/endpoint`
+
+Reference:  https://myopenshiftblog.com/openshift-and-ansible-event-driven-architecture-part-1/
