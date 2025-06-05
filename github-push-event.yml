@@ -1,0 +1,14 @@
+---
+- name: Process GitHub push event
+  hosts: localhost
+
+  tasks:
+    - name: Print ansible_eda
+      ansible.builtin.debug:
+        var: ansible_eda
+      when: ansible_eda is defined
+
+    - name: Print repo and time stamp information
+      ansible.builtin.debug:
+        msg: "Responding to push event on GitHub repository {{ ansible_eda.event.payload.repository.clone_url }} at {{ ansible_eda.event.payload.repository.pushed_at }}"
+      when: ansible_eda is defined

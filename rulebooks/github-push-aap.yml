@@ -1,0 +1,16 @@
+---
+- name: Act on GitHub webhook push event
+  hosts: localhost
+
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
+
+  rules:
+    - name: Execute github-push-event.yml playbook
+      condition: event.payload.repository.pushed_at is defined
+      action:
+        run_job_template:
+          name: EDA - GitHub Push Event
+          organization: Default
