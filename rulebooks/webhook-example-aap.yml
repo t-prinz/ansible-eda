@@ -9,8 +9,10 @@
 
   rules:
     - name: Execute say-hello.yml playbook
-      condition: event.payload.message == "Ansible is super cool"
+      condition: event.meta is defined
       action:
         run_job_template:
           name: EDA - Hello
           organization: Default
+
+#      condition: event.payload.message == "Ansible is super cool"
