@@ -14,4 +14,3 @@
         run_job_template:
           name: EDA - GitLab Push Event
           organization: Default
-#      condition: event.payload.repository.pushed_at is defined
