@@ -10,5 +10,5 @@
 
     - name: Print repo and time stamp information
       ansible.builtin.debug:
-        msg: "Responding to push event on GitLab repository {{ ansible_eda.event.payload.repository.clone_url }} at {{ ansible_eda.event.payload.repository.pushed_at }}"
+        msg: "Responding to push event on GitLab repository {{ ansible_eda.event.payload.repository.git_http_url }} at {{ ansible_eda.event.payload.commits[0] }}"
       when: ansible_eda is defined
