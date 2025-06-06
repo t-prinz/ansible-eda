@@ -1,0 +1,17 @@
+---
+- name: Act on GitLab webhook push event
+  hosts: localhost
+
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
+
+  rules:
+    - name: Execute gitlab-push-event.yml playbook
+      condition: event.payload is defined
+      action:
+        run_job_template:
+          name: EDA - GitLab Push Event
+          organization: Default
+#      condition: event.payload.repository.pushed_at is defined
